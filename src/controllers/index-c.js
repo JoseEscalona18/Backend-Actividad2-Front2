@@ -56,6 +56,25 @@ class productosController {
     }
   };
 
+  eliminarProducto = async (req, res) => {
+    try {
+      const serial = req.body.serial;
+
+      const producto = await products.findOne({ serial });
+      if (!producto) {
+        return res.status(404).json({ mensaje: 'Producto no encontrado' });
+      }
+
+      await products.deleteOne({'serial': serial});
+
+      res.json({ mensaje: 'Producto eliminado correctamente' });
+      
+    } catch (error) {
+      console.error('Error al eliminar el producto:', error);
+      res.status(500).json({ mensaje: 'Error al eliminar el producto' });
+    }
+  };
+
 
 }
 
