@@ -9,5 +9,14 @@ const app = express();
 app.set('port', process.env.PORT || 8000 );
 
 
+// MIDDLEWARES
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
+app.use(cookieParser());
+
+// ROUTES
+const indexRuta = require('./routes/index');
+
+app.use('/', indexRuta)
 
 module.exports = app;
