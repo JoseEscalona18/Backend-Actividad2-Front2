@@ -1,68 +1,84 @@
-# React + Vite
+# **Tienda UVM, Tienda de Productos Electrónicos**
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Descripción:**
+Es una aplicación web creada utilizando ReactJS con Vite como bundler, Tailwind CSS y el plugin Flowbite, dicha aplicación web se conecta a una base de datos para realizar operaciones CRUD (Crear, Leer, Actualizar y Eliminar) sobre el inventario de la tienda. La aplicación web funciona como un SPA (Single Page Application) y utiliza programación reactiva para mostrar el inventario de productos que el usuario desee ver, agregar, modificar y eliminar.
 
-Currently, two official plugins are available:
+# **Requisitos e instalación:**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1- Se necesitan los siguientes componentes: Node.JS y NPM
 
+2- Se dirigen hacia la dirección de ambos Proyectos en Github: [https://github.com/JoseEscalona18/Frontend-Actividad2-Front2 y https://github.com/JoseEscalona18/Backend-Actividad2-Front2
 
-# Objetivo: Desarrollar una aplicación web utilizando React con Vite como bundler, que se conecte a un backend para realizar operaciones CRUD (Crear, Leer, Actualizar y Eliminar) sobre el inventario de una tienda. La aplicación deberá funcionar como un SPA (Single Page Application).
+3- Seleccionan a Code y Local, luego los descargamos en Download ZIP
 
-Requerimientos:
+4- A partir de esto, nos quedaria en ZIP cada uno y los extraemos, meteremos ambos en una misma carpeta
 
-- [1] Página de inicio: Al cargar la aplicación, se mostrará una lista productos disponibles en el inventario de la tienda. Cada producto deberá mostrar su nombre, descripción, precio, cantidad disponible e imagen representativa.
+5- Luego, abrimos Visual Studio Code y pasamos/abrimos la carpeta dentro del programa, desde Archivo/Abrir Carpeta, y hacemos lo mismo en otra ventana, una para el back y otra para el front
 
-- [2] Crear Producto: Se debe proporcionar un formulario para crear una nuevo producto. El formulario deberá contener campos para ingresar el nombre, descripción, precio, cantidad inicial, imagen y categoría. Al enviar el formulario, se deberá guardar en el backend y mostrarla en la lista.
+6- Ahora que tenemos nuestro proyecto colocado, tan solo tenemos que abrir consola con CTRL + Ñ o Desde Terminal/Abrir Terminal en cada una de las ventanas
 
+7- Al iniciar la terminal, vamos a instalar los paquetes que tiene el proyecto, utilizando npm i o npm install esto debe hacerse en ambas ventanas
+ 
+8- Luego usamos el comando npm run dev y el programa se ejecutara, esto debe hacerse en ambas ventanas
 
-- [3] Actualizar: Cada producto en la lista deberá tener la opción de ser editada. Al hacer clic en el producto, se mostrará un formulario similar al de creación, pero con los campos prellenados con la información del producto seleccionada. Se deberá permitir modificar los campos de nombre, descripción, precio, cantidad, imagen, categoría e ingredientes relacionados. Al enviar el formulario de actualización, se deberán guardar los cambios en el backend y reflejarlos en la lista.
+9- Vamos hacia http://localhost:3000 y ahí tendremos la página ejecutándose.
 
+# **Uso:**
 
-- [3] Eliminar: Cada producto en la lista deberá tener la opción de ser eliminada. Al hacer clic en la opción de eliminación, se mostrará una confirmación y, en caso de aceptarla, se eliminará tanto del backend como de la lista.
+La aplicación es una SPA (Single Page Application), esta nos permite hacer un CRUD Básico desde una base de datos para gestionar el inventario:
 
+- **Crear:** Desde la sección "crear" podremos agregar diferentes productos.
 
-- [4] Búsqueda: Se deberá proporcionar un campo de búsqueda en la página de inicio, donde los usuarios puedan buscar el producto por su nombre, descripción o categoría. Al realizar la búsqueda, se deberán mostrar solo las que coincidan con los términos ingresados.
+- **Leer:** Los productos se leerán de forma automática cada vez que se entre la página, y así mismo se volverán a leer cada vez que haya un cambio en el inventario.
 
+- **Editar:** Al presionar el botón de "Editar" que se encuentra al lado de cada producto, podremos editar sus detalles y luego guardar. La tabla mostrará sus cambios a tiempo real sin necesidad de reiniciar.
 
-- [5] Listado: Se deberá proporcionar una sección en la página de inicio donde se muestre un listado disponibles en la tienda. Cada producto deberá mostrar su nombre, cantidad disponible y una descripción breve
+- **Borrar:** Al presionar el botón de "Eliminar" que se encuentra al lado de cada producto, podremos borrar el producto y la tabla se actualizará a tiempo real sin necesidad de reiniciar la página.
 
+# **Estructura del Proyecto:**
 
-# OJO:
+**Carpeta Base**
 
-Utilizar una base de datos para almacenar y recuperar los datos de las notas (por ejemplo, MongoDB).
+Posee una gran mayoria de archivos de configuración, que van desde el archivo de la variable de entorno, el git ignore para ignorar ciertas partes del codigo a la hora de subirse al repositorio, los package-json con la información de nuestras dependencias y demas, entre otros
 
-El backend debe esta desarrollado en Nodejs
+**Carpeta SRC**
 
+Usamos el estilo Model-Controller-Route para la realización del Back-End, en el Model poseemos la gestión de los datos, en donde hacemos la interacción con la base de datos. El controller, funciona para ser como un intermediario entre modelo y route, es el que procesara las solicitudes, validara las peticiones y hara que los datos lleguen de mejor forma al Model. En cuanto a los Routes, Las rutas son responsables de definir los puntos finales (endpoints) de la aplicación web. Son encargadas de mapear las URL recibidas a funciones de controlador apropiada
 
-# [6] Recomendaciones:
+En la carpeta, poseemos los archivos database y server para lograr la conexión con la DataBase de forma apropiada(ademas, de que el server posee las configuraciones del servidor, entre otros.), en conjunto con el index
 
-- Utiliza componentes de React para modularizar y reutilizar el código
+# **Dependencias y DevDependencias**
 
-- Crea un repositorio distinto para el backend
+**Dependencias:**
 
-- Utiliza algún método de comunicación con el backend, como fetch o axios, para realizar las operaciones CRUD.
+"cookie-parser: Middleware para analizar cookies en las solicitudes entrantes.
 
-- Organiza tu código siguiendo buenas prácticas de estructura y nomenclatura.
+cors: Middleware que permite la configuración de encabezados HTTP de control de acceso (CORS) para permitir las solicitudes desde diferentes dominios.
 
-- Diseña una interfaz de usuario atractiva y temática, utilizando elementos visuales relacionados con ventas y con producto.
+dotenv: Carga las variables de entorno desde un archivo .env en las variables de proceso de Node.js.
 
-- Considera agregar funcionalidades adicionales, como la posibilidad de filtrar los productos por categoría o ver detalles completos de un producto al hacer clic en ella.
+express: Un framework web rápido y minimalista para Node.js.
 
-- Considerar usar librerias UI orientadas a componente de react. Sugerencias:
+express-handlebars: Un motor de plantillas para Express que permite generar vistas HTML dinámicas.
 
-    * React-Bootstrap
-    * MDB React
-    * React-Strap
-    * Chakra UI
-    * Material UI
+express-session: Middleware para gestionar sesiones en Express.
 
-# A ENTREGAR: 
+mongodb: El controlador oficial de MongoDB para Node.js.
 
-- Figma con todo el diseño UI UX de la App.
-- Vídeo con cámara Explicando el código y donde se utilizan los hooks y para que se usan, los problemas encontrados funcionamiento de la actividad e inicio. MAX: 15min 
-- Código en github con todos los commits en ambos repos. Evitar subir el repositorio con commits dummy
-- El Código debe estar documentado, es decir comentada las lineas mas importantes para que cualquier desarrollador entienda los procesos. 
-- El repositorio debe tener un README  donde explique como ejecutar el proyecto paso a paso, sea el frontend o el backend. 
-- Se va evaluar: UI UX, reutilización de componentes, optimización de código, comentaros dentro del código, readme repositorio. 
+mongoose: Una biblioteca de modelado de objetos de MongoDB para Node.js que proporciona una solución basada en esquemas para modelar los datos de la aplicación.
+
+**DevDependencies:**
+
+nodemon: Una herramienta que ayuda a desarrollar aplicaciones Node.js reiniciando automáticamente la aplicación cuando se detectan cambios en los archivos.
+
+# **Autores:**
+
+- José Escalona / C.I: 28.206.133
+- Maikel Villegas Rojas / C.I: 30.302.836
+- Luis Monsalve / C.I: 30.380.310
+
+# **Enlaces:**
+
+- Proyecto en GitHub: [https://github.com/JoseEscalona18/Backend-Actividad2-Front2]
+
+# **Muchas gracias por su atención**
