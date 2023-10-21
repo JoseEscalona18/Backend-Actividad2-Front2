@@ -76,6 +76,25 @@ class productosController {
   };
 
 
+  editarProducto = async (req, res) => {
+    try {
+      const { serial, datosActualizados } = req.body;
+      const producto = await products.findOne({ serial });
+      if (!producto) {
+        return res.status(404).json({ mensaje: 'Producto no encontrado' });
+      }
+
+      await products.findOneAndUpdate({ serial },datosActualizados,{ new: true })
+
+      res.json({ mensaje: 'Producto editado correctamente' });
+      
+    } catch (error) {
+      console.error('Error al editae el producto:', error);
+      res.status(500).json({ mensaje: 'Error al editar el producto' });
+    }
+  };
+
+
 }
 
 const productosC = new productosController();

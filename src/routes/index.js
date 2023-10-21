@@ -14,4 +14,8 @@ router.delete('/', (req, res) => {
     controller.eliminarProducto(req, res);
 });
 
+router.put('/', (req, res) => {
+    controller.editarProducto(req, res);
+});
+
 module.exports = router;
