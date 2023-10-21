@@ -5,7 +5,7 @@ Es una aplicación web creada utilizando ReactJS con Vite como bundler, Tailwind
 
 # **Requisitos e instalación:**
 
-1- Se necesitan los siguientes componentes: Node.JS y NPM
+1- Se necesitan los siguientes componentes: Node.JS, MongoDB y NPM
 
 2- Se dirigen hacia la dirección de ambos Proyectos en Github: [https://github.com/JoseEscalona18/Frontend-Actividad2-Front2 y https://github.com/JoseEscalona18/Backend-Actividad2-Front2
 
@@ -16,6 +16,8 @@ Es una aplicación web creada utilizando ReactJS con Vite como bundler, Tailwind
 5- Luego, abrimos Visual Studio Code y pasamos/abrimos la carpeta dentro del programa, desde Archivo/Abrir Carpeta, y hacemos lo mismo en otra ventana, una para el back y otra para el front
 
 6- Ahora que tenemos nuestro proyecto colocado, tan solo tenemos que abrir consola con CTRL + Ñ o Desde Terminal/Abrir Terminal en cada una de las ventanas
+
+6.5 - Recuerden que debemos usar MongoDB Compass o su similar, para crear asi la conexión con MongoDB, al crearla, automaticamente la base de datos sera creada por el backend, cuando ingreses un producto
 
 7- Al iniciar la terminal, vamos a instalar los paquetes que tiene el proyecto, utilizando npm i o npm install esto debe hacerse en ambas ventanas
  
