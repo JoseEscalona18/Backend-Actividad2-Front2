@@ -3,6 +3,23 @@ const path = require('path')
 const cookieParser = require('cookie-parser');
 var cors = require('cors')
 
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+
+    destination: (req, file, cb) => {
+        cb(null, 'Images')
+    },
+
+    filename: (req, file, cb) => {
+        console.log(file)
+        cb(null, Date.now() + path.extname(file.originalname))
+    }
+})
+
+const upload = multer({storage: storage})
+
+
 ///INICIALIZACIONES
 const app = express();
 
@@ -19,6 +36,6 @@ app.use(cors());
 // ROUTES
 const indexRuta = require('./routes/index');
 
-app.use('/', indexRuta)
+app.use('/', indexRuta(upload))
 
 module.exports = app;

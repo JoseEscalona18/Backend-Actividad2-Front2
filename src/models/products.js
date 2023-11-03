@@ -26,8 +26,8 @@ const productoEsquema = new Schema({
         required: true
     },
     imagen: {
-        type: String,
-        required: true
+        data: Buffer, // Campo de tipo Buffer para guardar la imagen
+        contentType: String // Tipo de contenido de la imagen (por ejemplo, 'image/jpeg', 'image/png')
     }
 },
 {

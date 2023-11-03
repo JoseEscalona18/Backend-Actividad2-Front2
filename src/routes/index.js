@@ -1,21 +1,23 @@
 const express = require('express');
 const router = express.Router();
-const controller = require('../controllers/index-c')
+const controller = require('../controllers/index-c');
 
-router.get('/', (req, res) => {
+module.exports = (upload) => {
+  router.get('/', (req, res) => {
     controller.obtenerProductos(req, res);
-});
+  });
 
-router.post('/', (req, res) => {
+  router.post('/', upload.single('imagen'), (req, res) => {
     controller.agregarProductos(req, res);
-});
+  });
 
-router.delete('/', (req, res) => {
+  router.delete('/', (req, res) => {
     controller.eliminarProducto(req, res);
-});
+  });
 
-router.put('/', (req, res) => {
+  router.put('/', (req, res) => {
     controller.editarProducto(req, res);
-});
+  });
 
-module.exports = router;
+  return router;
+};

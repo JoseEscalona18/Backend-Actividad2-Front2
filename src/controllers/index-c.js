@@ -1,43 +1,49 @@
 const products = require('../models/products');
 
-
 class productosController {
-
-    obtenerProductos = async (req, res) => {
+  obtenerProductos = async (req, res) => {
     try {
+      const productos = await products.find();
 
-        const productos = await products.find()
-
-        if (productos == ''){
-            res.status(200).send('No hay productos en la Base de Datos');
-        } else {
-            res.status(200).send(productos);
-        }
-
+      if (productos.length === 0) {
+        res.status(200).send('No hay productos en la Base de Datos');
+      } else {
+        res.status(200).json(productos);
+      }
     } catch (error) {
-      res.status(404).json({Error: 'Error al obtener productos'})
+      res.status(500).json({ Error: 'Error al obtener productos' });
     }
   };
 
   agregarProductos = async (req, res) => {
     try {
+      const { serial, nombre, descripcion, cantidad, precio, categoria } = req.body;
+      const imageData = req.file.buffer;
 
-        const {serial, nombre, descripcion, cantidad, precio, imagen, categoria} = req.body;
-        const serialEquipos = JSON.stringify(await products.find({serial: serial}))
-        if (serialEquipos == '[]'){
-            const nuevoproducto = new products({serial, nombre, descripcion, cantidad, precio, categoria, imagen});
-            await nuevoproducto.save()
-            res.status(201).send('Producto agregado correctamente');
+      const serialEquipos = await products.findOne({ serial });
 
-        }else{
-            res.status(400).send('Serial de equipo ya registrado');
-        }
+      if (serialEquipos) {
+        res.status(400).send('Serial de equipo ya registrado');
+      } else {
+        const nuevoproducto = new products({
+          serial,
+          nombre,
+          descripcion,
+          cantidad,
+          precio,
+          categoria,
+          imagen: { data: imageData, contentType: req.file.mimetype }
+        });
 
+        await nuevoproducto.save();
+        res.status(201).send('Producto agregado correctamente');
+      }
     } catch (error) {
-      res.status(404).json({Error: 'Error al obtener productos'})
+      console.error('Error al agregar producto:', error);
+      res.status(500).json({ Error: 'Error al agregar producto' });
     }
   };
-
+  
   busquedaProductos = async (req, res) => {
     try {
 
