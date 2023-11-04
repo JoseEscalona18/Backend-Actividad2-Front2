@@ -35,7 +35,11 @@ app.use(cors());
 
 // ROUTES
 const indexRuta = require('./routes/index');
+const authRutas = require('./routes/auth.js');
+
 
 app.use('/', indexRuta(upload))
+app.use('/auth', authRutas)
+
 
 module.exports = app;
