@@ -17,7 +17,7 @@ router.get("/users", controller.obtenerUsuarios)
 router.get('/user', obtenerDatosUsuario);
 
 router.put('/users/editar/', (req, res) => {
-    controller.editarProducto(req, res);
+    controller.editarUsuario(req, res);
   });
   
 router.get('/user/:id', verifyToken, getUserById);

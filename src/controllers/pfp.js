@@ -12,11 +12,9 @@ const obtenerDatosUsuario = async (req, res) => {
     }
 
     // Verificar y decodificar el token
-    console.log(token)
     const decoded = jwt.verify(token, "secreto"); // Reemplaza 'secret_key' con tu propia clave secreta
 
     const _id = decoded.id; // Obtén el ID del usuario desde el token decodificado
-    console.log(decoded)
 
     // Utiliza el ID del usuario para obtener los datos del usuario desde la base de datos
     const usuario = await Usuario.findById(_id);

@@ -1,8 +1,7 @@
-const bcrypt = require("bcrypt");
 const Usuario = require("../models/user.js");
-const jwt = require("jsonwebtoken");
 
 class usuariosController {
+
     obtenerUsuarios = async (req, res) => {
   try {
     const usuariosCompletos = await Usuario.find();
@@ -28,10 +27,28 @@ class usuariosController {
     }
   } catch (error) {
     res.status(500).json({ Error: 'Error al obtener usuarios' });
+  }; 
+}
+editarUsuario = async (req, res) => {
+  try {
+    const { correo, datosActualizados } = req.body;
+    const usuario = await Usuario.findOne({ correo });
+    console.log(correo)
+
+    if (!usuario) {
+      return res.status(404).json({ mensaje: 'Usuario no encontrado' });
+    }
+
+    await User.findOneAndUpdate({ correo }, datosActualizados, { new: true });
+
+    res.json({ mensaje: 'Usuario editado correctamente' });
+  } catch (error) {
+    console.error('Error al editar el usuario:', error);
+    res.status(500).json({ mensaje: 'Error al editar el usuario' });
   }
+};   
 
-
-}};
+};
 
 
 
