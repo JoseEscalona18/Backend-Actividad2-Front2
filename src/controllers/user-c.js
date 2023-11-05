@@ -13,7 +13,7 @@ class usuariosController {
         apellido: usuariosCompletos[i].apellido,
         correo: usuariosCompletos[i].correo,
         contraseña: usuariosCompletos[i].contraseña,
-        descripción: usuariosCompletos[i].descripción,
+        descripcion: usuariosCompletos[i].descripcion,
         telefono: usuariosCompletos[i].telefono
       };
 
@@ -33,13 +33,12 @@ editarUsuario = async (req, res) => {
   try {
     const { correo, datosActualizados } = req.body;
     const usuario = await Usuario.findOne({ correo });
-    console.log(correo)
 
     if (!usuario) {
       return res.status(404).json({ mensaje: 'Usuario no encontrado' });
     }
 
-    await User.findOneAndUpdate({ correo }, datosActualizados, { new: true });
+    await Usuario.findOneAndUpdate({ correo }, datosActualizados, { new: true });
 
     res.json({ mensaje: 'Usuario editado correctamente' });
   } catch (error) {
