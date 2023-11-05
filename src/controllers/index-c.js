@@ -41,28 +41,95 @@ class productosController {
 
   agregarProductos = async (req, res) => {
     try {
-      const { serial, nombre, descripcion, cantidad, precio, categoria } = req.body;
-      const imagenBuffer = req.file.buffer;
-      const contentType = req.file.mimetype;
+      if (req.body.nombreBoton == 'Buscar'){
+        let productos = []
+        let data
+        let imagenCompleta
+
+        if(req.body.filtro == "Nombre"){
+
+          const nombre = req.body.busqueda
+          if (!RegExp.escape) {
+            RegExp.escape = function(s) {
+              return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+            };
+          }
+    
+          var regex = new RegExp('.*' + RegExp.escape(nombre) + '.*', 'i');
+          const productoscom = await products.find({nombre: regex});
+    
+    
+          for(let i = 0; i<productoscom.length;i++){
+    
+            data = productoscom[i].imagen.data
+            imagenCompleta = 'data:'+productoscom[i].imagen.contentType+";base64,"+data.toString('base64')
+    
+            productos[i] = {
+              serial: productoscom[i].serial,
+              nombre: productoscom[i].nombre,
+              descripcion: productoscom[i].descripcion,
+              cantidad: productoscom[i].cantidad,
+              precio: productoscom[i].precio,
+              categoria: productoscom[i].categoria,
+              imagen: imagenCompleta,
       
-      const serialEquipos = await products.findOne({ serial });
+            }
+          }
+    
+          res.status(200).json(productos);
 
-      if (serialEquipos) {
-        res.status(400).send('Serial de equipo ya registrado');
-      } else {
-        const nuevoproducto = new products({
-          serial,
-          nombre,
-          descripcion,
-          cantidad,
-          precio,
-          categoria,
-          imagen: { data:imagenBuffer , contentType}
+        }else if(req.body.filtro == "Categoria"){
 
-        });
-        await nuevoproducto.save();
-        res.status(201).send('Producto agregado correctamente');
+          const categoria = req.body.categoria
+
+          const productoscom = await products.find({categoria: categoria});
+
+          for(let i = 0; i<productoscom.length;i++){
+    
+            data = productoscom[i].imagen.data
+            imagenCompleta = 'data:'+productoscom[i].imagen.contentType+";base64,"+data.toString('base64')
+    
+            productos[i] = {
+              serial: productoscom[i].serial,
+              nombre: productoscom[i].nombre,
+              descripcion: productoscom[i].descripcion,
+              cantidad: productoscom[i].cantidad,
+              precio: productoscom[i].precio,
+              categoria: productoscom[i].categoria,
+              imagen: imagenCompleta,
+      
+            }
+          }
+
+          res.status(200).json(productos);
+        }
+
+
+      }else{
+        const { serial, nombre, descripcion, cantidad, precio, categoria } = req.body;
+        const imagenBuffer = req.file.buffer;
+        const contentType = req.file.mimetype;
+        
+        const serialEquipos = await products.findOne({ serial });
+  
+        if (serialEquipos) {
+          res.status(400).send('Serial de equipo ya registrado');
+        } else {
+          const nuevoproducto = new products({
+            serial,
+            nombre,
+            descripcion,
+            cantidad,
+            precio,
+            categoria,
+            imagen: { data:imagenBuffer , contentType}
+  
+          });
+          await nuevoproducto.save();
+          res.status(201).send('Producto agregado correctamente');
+        }
       }
+
     } catch (error) {
       console.error('Error al agregar producto:', error);
       res.status(500).json({ Error: 'Error al agregar producto' });
