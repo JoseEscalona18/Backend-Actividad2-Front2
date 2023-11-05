@@ -16,7 +16,6 @@ class productosController {
 
         data = productoscom[i].imagen.data
         imagenCompleta = 'data:'+productoscom[i].imagen.contentType+";base64,"+data.toString('base64')
-        console.log(data)
 
         productos[i] = {
           serial: productoscom[i].serial,
@@ -29,9 +28,6 @@ class productosController {
   
         }
       }
-
-
-      console.log(productos)
 
       if (productos.length === 0) {
         res.status(200).send('No hay productos en la Base de Datos');
