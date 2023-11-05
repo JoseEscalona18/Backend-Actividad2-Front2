@@ -1,9 +1,37 @@
+const { json } = require('body-parser');
 const products = require('../models/products');
+
+const sharp = require('sharp');
+const { Binary } = require('mongodb');
 
 class productosController {
   obtenerProductos = async (req, res) => {
     try {
-      const productos = await products.find();
+      const productoscom = await products.find();
+      let imagenCompleta
+      let data
+      let productos = []
+
+      for(let i = 0; i<productoscom.length;i++){
+
+        data = productoscom[i].imagen.data
+        imagenCompleta = 'data:'+productoscom[i].imagen.contentType+";base64,"+data.toString('base64')
+        console.log(data)
+
+        productos[i] = {
+          serial: productoscom[i].serial,
+          nombre: productoscom[i].nombre,
+          descripcion: productoscom[i].descripcion,
+          cantidad: productoscom[i].cantidad,
+          precio: productoscom[i].precio,
+          categoria: productoscom[i].categoria,
+          imagen: imagenCompleta,
+  
+        }
+      }
+
+
+      console.log(productos)
 
       if (productos.length === 0) {
         res.status(200).send('No hay productos en la Base de Datos');
@@ -18,8 +46,9 @@ class productosController {
   agregarProductos = async (req, res) => {
     try {
       const { serial, nombre, descripcion, cantidad, precio, categoria } = req.body;
-      const imageData = req.file.buffer;
-
+      const imagenBuffer = req.file.buffer;
+      const contentType = req.file.mimetype;
+      
       const serialEquipos = await products.findOne({ serial });
 
       if (serialEquipos) {
@@ -32,9 +61,9 @@ class productosController {
           cantidad,
           precio,
           categoria,
-          imagen: { data: imageData, contentType: req.file.mimetype }
-        });
+          imagen: { data:imagenBuffer , contentType}
 
+        });
         await nuevoproducto.save();
         res.status(201).send('Producto agregado correctamente');
       }

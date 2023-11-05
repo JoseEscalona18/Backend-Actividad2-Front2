@@ -26,15 +26,15 @@ const productoEsquema = new Schema({
         required: true
     },
     imagen: {
-        data: Buffer, // Campo de tipo Buffer para guardar la imagen
-        contentType: String // Tipo de contenido de la imagen (por ejemplo, 'image/jpeg', 'image/png')
+        data: Buffer,
+        contentType: String
     }
 },
 {
     timestamps: true
 });
 
-// Crear el modelo de usuario
+
 const products = model('products', productoEsquema);
 
 // Exportar el modelo de usuario
