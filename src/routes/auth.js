@@ -6,6 +6,7 @@ const login = require("../controllers/login.js")
 const verifyToken = require("../middlewares/verifytoken.js")
 const obtenerDatosUsuario = require("../controllers/pfp.js")
 const controller = require('../controllers/user-c.js');
+const decodetoken = require('../middlewares/decodetoken')
 
 
 
@@ -22,6 +23,7 @@ router.put('/users/editar/', (req, res) => {
   
 router.get('/user/:id', verifyToken, getUserById);
 router.post("/login", login);
+router.get('/user/:id', verifyToken, getUserById);
 
 
 

@@ -5,6 +5,8 @@ const jwt = require("jsonwebtoken");
 const login = async (req, res) => {
   const { correo, contraseña } = req.body;
 
+  const clave = process.env.JWTPRIVATEKEY
+
   Usuario.findOne({ correo }).then((usuario) => {
     if (!usuario) {
       return res.json({ mensaje: "Usuario no encontrado" });
@@ -12,14 +14,15 @@ const login = async (req, res) => {
 
     bcrypt.compare(contraseña, usuario.contraseña).then((esCorrecta) => {
       if (esCorrecta) {
-        const { id, nombre } = usuario;
+        const { id, nombre, rol } = usuario;
 
         const data = {
           id,
           nombre,
+          rol,
         };
 
-        const token = jwt.sign(data, "secreto", {
+        const token = jwt.sign(data, clave, {
           expiresIn: 86400 /* 24hs */,
         });
 
@@ -28,6 +31,7 @@ const login = async (req, res) => {
           usuario: {
             id,
             nombre,
+            rol,
             token,
           },
         });

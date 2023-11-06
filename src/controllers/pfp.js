@@ -1,7 +1,7 @@
 const Usuario = require('../models/user.js'); // Asegúrate de importar correctamente el modelo de usuario
 const jwt = require('jsonwebtoken');
 
-const secreto = process.env.JWTPRIVATEKEY
+const clave = process.env.JWTPRIVATEKEY
 
 const obtenerDatosUsuario = async (req, res) => {
   try {
@@ -12,7 +12,7 @@ const obtenerDatosUsuario = async (req, res) => {
     }
 
     // Verificar y decodificar el token
-    const decoded = jwt.verify(token, "secreto"); // Reemplaza 'secret_key' con tu propia clave secreta
+    const decoded = jwt.verify(token, clave); // Reemplaza 'secret_key' con tu propia clave secreta
 
     const _id = decoded.id; // Obtén el ID del usuario desde el token decodificado
 

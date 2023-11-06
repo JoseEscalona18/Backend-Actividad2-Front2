@@ -7,6 +7,7 @@ const UsuarioSchema = new Schema({
   contraseña: { type: String, required: true },
   descripcion: { type: String },
   telefono: {type: Number},
+  rol: {type: String, required: true}
 });
 
 const usuarios = model("Usuario", UsuarioSchema);

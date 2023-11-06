@@ -7,7 +7,7 @@ const register = async (req, res) => {
   Usuario.findOne({ correo }).then((usuario) => {
     if (usuario) {
       return res.json({ mensaje: "Ya existe un usuario con ese correo" });
-    } else if (!nombre || !apellido || !correo || !contraseña) { // Se agrega la validación para el campo "apellido"
+    } else if (!nombre || !apellido || !correo || !contraseña) {
       return res.json({ mensaje: "Falta el nombre / apellido / correo / contraseña" });
     } else {
       bcrypt.hash(contraseña, 10, (error, contraseñaHasheada) => {
@@ -15,9 +15,10 @@ const register = async (req, res) => {
         else {
           const nuevoUsuario = new Usuario({
             nombre,
-            apellido, // Se agrega el campo "apellido" al nuevo usuario
+            apellido,
             correo,
             contraseña: contraseñaHasheada,
+            rol: 'usuario', // Asignar el rol de "Usuario"
           });
 
           nuevoUsuario
