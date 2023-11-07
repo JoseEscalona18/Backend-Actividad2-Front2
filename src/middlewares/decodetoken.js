@@ -18,7 +18,7 @@ const decodificarTokenMiddleware = (req, res) => {
     console.log(decoded);
 
     // Enviar los datos decodificados como respuesta al front-end
-    return res.status(200).json({data:decoded})
+    return res.status(200).json({data: decoded})
   } catch (error) {
     if (error instanceof jwt.JsonWebTokenError) {
       return res.status(401).json({ message: 'Token inválido' });
