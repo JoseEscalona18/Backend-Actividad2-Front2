@@ -6,7 +6,7 @@ const register = async (req, res) => {
 
   Usuario.findOne({ correo }).then((usuario) => {
     if (usuario) {
-      return res.json({ mensaje: "Ya existe un usuario con ese correo" });
+      if (usuario) return res.status(400).json({ error: "Email already exit" });
     } else if (!nombre || !apellido || !correo || !contraseña) {
       return res.json({ mensaje: "Falta el nombre / apellido / correo / contraseña" });
     } else {

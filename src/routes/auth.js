@@ -12,6 +12,7 @@ const decodetoken = require('../middlewares/decodetoken')
 
 
 router.post("/register", register);
+router.get("/decode", decodetoken)
 
 router.get("/users", controller.obtenerUsuarios)
 

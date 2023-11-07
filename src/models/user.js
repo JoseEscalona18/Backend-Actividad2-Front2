@@ -7,6 +7,8 @@ const UsuarioSchema = new Schema({
   contraseña: { type: String, required: true },
   descripcion: { type: String },
   telefono: {type: Number},
+  favoritos: {type: String},
+
   rol: {type: String, required: true}
 });
 
