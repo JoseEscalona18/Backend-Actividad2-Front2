@@ -17,7 +17,6 @@ Es una aplicación web creada utilizando ReactJS con Vite como bundler, Tailwind
 
 5.5. Pasamos las variables de entornos, la de .env a el Backend y la de .env.local al Front-End
 
-
 6- Ahora que tenemos nuestro proyecto colocado, tan solo tenemos que abrir consola con CTRL + Ñ o Desde Terminal/Abrir Terminal en cada una de las ventanas
 
 6.5 - Recuerden que debemos usar MongoDB Compass o su similar, para crear asi la conexión con MongoDB, al crearla, automaticamente la base de datos sera creada por el backend, cuando ingreses un producto
@@ -43,6 +42,16 @@ La aplicación es una SPA (Single Page Application), esta nos permite hacer un C
 - **Editar:** Al presionar el botón de "Editar" que se encuentra al lado de cada producto, podremos editar sus detalles y luego guardar. La tabla mostrará sus cambios a tiempo real sin necesidad de reiniciar.
 
 - **Borrar:** Al presionar el botón de "Eliminar" que se encuentra al lado de cada producto, podremos borrar el producto y la tabla se actualizará a tiempo real sin necesidad de reiniciar la página.
+
+- Login: Puedes loguearte como usuario, tendras el rol de usuario o puedes acceder con la cuenta de admin
+
+- Registro: Puedes registrarte como un usuario, a partir de campos de datos, y luego accederas como usuario
+
+- Favoritos: Puedes asignar productos favoritos al estar logueado y se veran reflejados en la BD
+
+- Tabla Users: Puedes ver y modificar los usuarios, siendo admin
+
+- Las rutas estan protegidas por permisos, dados desde el Front a partir de ciertos requisitos 
 
 # **Estructura del Proyecto:**
 
