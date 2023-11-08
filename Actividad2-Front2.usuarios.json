@@ -1,0 +1,45 @@
+[{
+  "_id": {
+    "$oid": "654b5343b35b5ea46cb1d797"
+  },
+  "nombre": "Maikel ",
+  "apellido": "Villegas",
+  "correo": "maikelv1@gmail.com",
+  "contraseña": "$2b$10$a5sZk3m6P32cTjUS8t7MP.O2lnPty2Zx3Jd4Bg2b5BgmMBSVi7uG6",
+  "favoritos": [],
+  "rol": "usuario",
+  "__v": 0,
+  "descripcion": "12345",
+  "telefono": 12345
+},
+{
+  "_id": {
+    "$oid": "654b54d4b35b5ea46cb1d7b2"
+  },
+  "nombre": "Admin",
+  "apellido": "Tienda",
+  "correo": "admin@gmail.com",
+  "contraseña": "$2b$10$RDO.ZePtlTQf5qx/4HSqjeHzuZEMJBa0y8Yeqbn1OzHdAWxeX5fu.",
+  "favoritos": [
+    "25485140005"
+  ],
+  "rol": "admin",
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "654b5f05b35b5ea46cb1d826"
+  },
+  "nombre": "prueba",
+  "apellido": "prueba",
+  "correo": "prueba@gmail.com",
+  "contraseña": "$2b$10$QdqC95BVqmoFS/PE3PwGaOG7HP89iaOPhDeHae9URINcbvIwwvfvW",
+  "favoritos": [
+    "25485140005",
+    "1458545007",
+    "24M1N3200VL/27",
+    "54845421398"
+  ],
+  "rol": "usuario",
+  "__v": 4
+}]
