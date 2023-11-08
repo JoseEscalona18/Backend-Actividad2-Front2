@@ -5,7 +5,6 @@ const clave = process.env.JWTPRIVATEKEY;
 const decodificarTokenMiddleware = (req, res) => {
   // Obtener el token de las cookies de la solicitud
   const token = req.cookies.token;
-  console.log(token)
   
 
   if (!token) {
@@ -15,7 +14,6 @@ const decodificarTokenMiddleware = (req, res) => {
   try {
     // Verificar y decodificar el token
     const decoded = jwt.verify(token, clave);
-    console.log(decoded);
 
     // Enviar los datos decodificados como respuesta al front-end
     return res.status(200).json({data: decoded})

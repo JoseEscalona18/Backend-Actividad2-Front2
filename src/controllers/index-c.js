@@ -1,11 +1,13 @@
 const { json } = require('body-parser');
 const products = require('../models/products');
+const Usuario = require("../models/user.js");
 
 const sharp = require('sharp');
 const { Binary } = require('mongodb');
 
 class productosController {
   obtenerProductos = async (req, res) => {
+    console.log(req.query)
     try {
       const productoscom = await products.find();
       let imagenCompleta
@@ -104,6 +106,60 @@ class productosController {
           res.status(200).json(productos);
         }
 
+
+      }else if((req.body.nombreBoton == 'Favorito')){
+
+        const { idUser, serial, action } = req.body;
+
+        if (action === 'Agregar') {
+          try {
+            // Busca al usuario por su idUser
+            const usuario = await Usuario.findOne({ _id: idUser });
+      
+            if (usuario) {
+              // Agrega el serial al arreglo de favoritos
+
+              const existeSerial = usuario.favoritos.includes(serial);
+              
+              if (existeSerial) {
+                return
+              }
+
+              usuario.favoritos.push(serial);
+      
+              // Guarda los cambios en el usuario
+              await usuario.save();
+            } 
+          } catch (error) {
+            return res.status(500).json({
+              message: 'Error al agregar el producto a favoritos',
+              error: error.message
+            });
+          }
+        } else if (action === 'Quitar') {
+          try {
+            // Busca al usuario por su idUser
+            const usuario = await Usuario.findOne({ _id: idUser });
+      
+            if (usuario) {
+              // Verifica si el producto está en la lista de favoritos
+              const index = usuario.favoritos.indexOf(serial);
+              if (index > -1) {
+                // Elimina el producto de la lista de favoritos
+                usuario.favoritos.splice(index, 1);
+      
+                // Guarda los cambios en el usuario
+                await usuario.save();
+      
+              }
+            }
+          } catch (error) {
+            return res.status(500).json({
+              message: 'Error al eliminar el producto de favoritos',
+              error: error.message
+            });
+          }
+        }
 
       }else{
         const { serial, nombre, descripcion, cantidad, precio, categoria } = req.body;
